@@ -28,7 +28,7 @@ public class Server
                 
                 System.out.println("Client connected from: " + SOCK.getLocalAddress().getHostName());
                 
-                AddUserName(SOCK);
+               // AddUserName(SOCK);
                 
                 Server_Return CHAT = new Server_Return(SOCK);
                 Thread X = new Thread(CHAT);
@@ -49,13 +49,13 @@ public class Server
         String UserName = INPUT.nextLine();
         CurrentUsers.add(UserName);
         
-        for(int i = 1; i <= Server.ConnectionArray.size(); i++)
-        {
-            Socket TEMP_SOCK = (Socket)Server.ConnectionArray.get(i-1);
-            PrintWriter OUT = new PrintWriter(TEMP_SOCK.getOutputStream());
-            OUT.println("#?!" + CurrentUsers);
-            OUT.flush();
-        }
+//        for(int i = 1; i <= Server.ConnectionArray.size(); i++)
+//        {
+//            Socket TEMP_SOCK = (Socket)Server.ConnectionArray.get(i-1);
+//            PrintWriter OUT = new PrintWriter(TEMP_SOCK.getOutputStream());
+//            OUT.println("#?!" + CurrentUsers);
+//            OUT.flush();
+//        }
     }
     
 }

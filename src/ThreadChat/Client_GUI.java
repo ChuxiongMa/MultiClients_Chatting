@@ -14,6 +14,7 @@ public class Client_GUI extends JFrame{
 	public static JTextField userText;
 	public static JTextArea chatWindow;//display message
 	private JButton send = new JButton("SEND");
+	private JButton disconnect = new JButton("DISCONNECT");
 	private JPanel panel = new JPanel();
     
     public static String UserName = "Anonymous";
@@ -41,13 +42,31 @@ public class Client_GUI extends JFrame{
         	    }   			
         	);  
     	
-    	panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
-    	panel.add(userText);
-    	panel.add(send);
+    	disconnect.addActionListener(
+        		new ActionListener(){
+        			public void actionPerformed(ActionEvent event){
+        				try
+        		        {
+        		            ChatClient.DISCONNECT();
+        		        }
+        		        catch(Exception e)
+        		        {
+        		            e.printStackTrace();
+        		        }
+        				
+        			}
+        	    }   			
+        	);  
+    	
+    	
+    	panel.setLayout(new BorderLayout());
+    	panel.add(userText,BorderLayout.CENTER);
+    	panel.add(disconnect, BorderLayout.EAST);
+    	panel.add(send, BorderLayout.WEST);
     	add(panel, BorderLayout.SOUTH);
     	chatWindow = new JTextArea();
     	add(new JScrollPane(chatWindow));
-    	setSize(300,150);
+    	setSize(500,350);
     	setVisible(true);
     	Connect();
     }
