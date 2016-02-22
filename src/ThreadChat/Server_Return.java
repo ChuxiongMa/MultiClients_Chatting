@@ -4,6 +4,8 @@ import java.io.*;
 import java.net.*;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 public class Server_Return implements Runnable
 {
     
@@ -19,23 +21,15 @@ public class Server_Return implements Runnable
     
     public void CheckConnection() throws IOException
     {
-        if(!SOCK.isConnected())
-        {
-            for(int i = 1; i <= Server.ConnectionArray.size(); i++)
-            {
-                if(Server.ConnectionArray.get(i)==SOCK)
-                {
-                    Server.ConnectionArray.remove(i);
-                }
-            }
-//            for(int i = 1; i <= A_Chat_Server.ConnectionArray.size(); i++)
-//            {
-//                Socket TEMP_SOCK = (Socket) A_Chat_Server.ConnectionArray.get(i-1);
-//                PrintWriter TEMP_OUT = new PrintWriter(TEMP_SOCK.getOutputStream());
-//                TEMP_OUT.println(TEMP_SOCK.getLocalAddress().getHostName()+" disconnected!");
-//            }
-            
-        }
+    	 for(int i = 0; i < Server.ConnectionArray.size(); i++)
+         {
+             if(Server.ConnectionArray.get(i).isClosed())
+             {
+                 Server.ConnectionArray.remove(i);
+             }
+         }
+    	 
+    	
     }
     
     public void run()
@@ -49,7 +43,6 @@ public class Server_Return implements Runnable
                 
                 while(true)
                 {
-                    CheckConnection();
                     
                     if(!INPUT.hasNext())
                     {
@@ -60,6 +53,8 @@ public class Server_Return implements Runnable
                     
                     System.out.println("Client said: " + MESSAGE);
                     
+                    CheckConnection();
+                    
                     for(int i = 1; i <= Server.ConnectionArray.size(); i++)
                     {
                         Socket TEMP_SOCK = (Socket) Server.ConnectionArray.get(i-1);
@@ -68,6 +63,8 @@ public class Server_Return implements Runnable
                         TEMP_OUT.flush();
                         System.out.println("Sent to: " + TEMP_SOCK.getLocalAddress().getHostName());
                     }
+                    
+                    
                 }
             }
             finally

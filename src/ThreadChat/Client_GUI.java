@@ -81,15 +81,15 @@ public class Client_GUI extends JFrame{
     {
         try
         {
-            final int PORT = 444;
+            final int PORT = 80;
             final String HOST = "localhost";
             Socket SOCK = new Socket(HOST, PORT);
-            System.out.println("You connected to: "+ HOST);
+            chatWindow.append("You connected to: "+ HOST + "\n");
             
             ChatClient = new Client(SOCK);
             
             PrintWriter OUT = new PrintWriter(SOCK.getOutputStream());
-            OUT.println(UserName);
+            OUT.println(UserName + " has entered this room");
             OUT.flush();
             
             Thread X = new Thread(ChatClient);
@@ -142,7 +142,6 @@ public class Client_GUI extends JFrame{
     		client = new Client_GUI();
     		client.setTitle(UserName+"'s Chat Box");
     		client.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            
             LogInWindow.setVisible(false);
            
         }

@@ -3,6 +3,7 @@ package ThreadChat;
 import java.net.*;
 import java.io.*;
 import java.util.Scanner;
+
 import javax.swing.JOptionPane;
 
 public class Client implements Runnable{
@@ -41,10 +42,11 @@ public class Client implements Runnable{
     
     public void DISCONNECT() throws IOException
     {
-        OUT.println(Client_GUI.UserName + " has disconnected.");
-        OUT.flush();
+        OUT.println(Client_GUI.UserName + " has disconnected and left.");
+        OUT.flush();      
         SOCK.close();
-        JOptionPane.showMessageDialog(null, "You disconnected");
+        
+        JOptionPane.showMessageDialog(null, "You are disconnected");
         System.exit(0);
     }
     

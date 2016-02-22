@@ -17,7 +17,7 @@ public class Server
         
         try
         {
-            final int PORT = 444;
+            final int PORT = 80;
             ServerSocket SERVER = new ServerSocket(PORT);
             System.out.println("Waiting for clients...");
             
@@ -27,8 +27,6 @@ public class Server
                 ConnectionArray.add(SOCK);
                 
                 System.out.println("Client connected from: " + SOCK.getLocalAddress().getHostName());
-                
-               // AddUserName(SOCK);
                 
                 Server_Return CHAT = new Server_Return(SOCK);
                 Thread X = new Thread(CHAT);
@@ -41,21 +39,6 @@ public class Server
             System.out.println(e);
         }
         
-    }
-    
-    public static void AddUserName(Socket X) throws IOException
-    {
-        Scanner INPUT = new Scanner(X.getInputStream());
-        String UserName = INPUT.nextLine();
-        CurrentUsers.add(UserName);
-        
-//        for(int i = 1; i <= Server.ConnectionArray.size(); i++)
-//        {
-//            Socket TEMP_SOCK = (Socket)Server.ConnectionArray.get(i-1);
-//            PrintWriter OUT = new PrintWriter(TEMP_SOCK.getOutputStream());
-//            OUT.println("#?!" + CurrentUsers);
-//            OUT.flush();
-//        }
     }
     
 }
